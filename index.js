@@ -5,7 +5,6 @@ require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
 
 // connect with database
-connectWithDB();
 
 // cloudinary configuration
 cloudinary.config({
@@ -44,11 +43,13 @@ app.use(express.json());
 // use express router
 app.use("/", require("./routes"));
 
-app.listen(process.env.PORT || 8000, (err) => {
-  if (err) {
-    console.log("Error in connecting to server: ", err);
-  }
-  console.log(`Server is running on port no. ${process.env.PORT}`);
+connectWithDB().then(() => {
+  app.listen(process.env.PORT || 8000, (err) => {
+    if (err) {
+      console.log("Error in connecting to server: ", err);
+    }
+    console.log(`Server is running on port no. ${process.env.PORT}`);
+  });
 });
 
 module.exports = app;
