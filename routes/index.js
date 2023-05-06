@@ -2,9 +2,17 @@ const express = require("express");
 const router = express.Router();
 const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
+const multerS3 = require("multer-s3");
+const aws = require("aws-sdk");
 
 // multer
-const upload = multer({ dest: "uploads/" });
+
+// const s3 = new aws.S3({
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+// });
+
+const upload = multer({ dest: "/tmp" });
 
 router.get("/", (req, res) => {
   res.status(200).json({
