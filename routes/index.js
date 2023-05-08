@@ -13,7 +13,7 @@ const aws = require("aws-sdk");
 // });
 
 const upload = multer({
-  dest: process.env.TEMPORARY_FILE_UPLOAD_PATH || "/tmp",
+  dest: "/tmp",
 });
 
 router.get("/", (req, res) => {
