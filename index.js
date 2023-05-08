@@ -18,27 +18,30 @@ const app = express();
 // middleware to handle json
 app.use(express.json());
 
-// const whiteList = [
-//   "https://airbnb-clone0.netlify.app",
-//   "https://airbnb-1.netlify.app",
-//   "http://localhost:5173",
-//   "http://localhost:3002",
-// ];
+const whiteList = [
+  "https://airbnb-clone0.netlify.app",
+  "https://airbnb-1.netlify.app",
+  "http://localhost:5173",
+  "http://localhost:3002",
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://127.0.0.1:3001",
+];
 
-// // CORS
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: function (origin, callback) {
-//       if (whiteList.indexOf(origin !== -1)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by cors"));
-//       }
-//     },
-//     exposedHeaders: ["set-cookie"],
-//   })
-// );
+// CORS
+app.use(
+  cors({
+    credentials: true,
+    origin: function (origin, callback) {
+      if (whiteList.indexOf(origin !== -1)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by cors"));
+      }
+    },
+    exposedHeaders: ["set-cookie"],
+  })
+);
 
 // use express router
 app.use("/", require("./routes"));

@@ -12,7 +12,7 @@ const aws = require("aws-sdk");
 //   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 // });
 
-const upload = multer({ dest: "/tmp" });
+const upload = multer({ dest: "uploads/" });
 
 router.get("/", (req, res) => {
   res.status(200).json({
