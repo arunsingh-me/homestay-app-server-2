@@ -1,19 +1,20 @@
-const Place = require('../models/Place');
-const userFromToken = require('../utils/userFromToken');
+const Place = require("../models/Place");
+const userFromToken = require("../utils/userFromToken");
 
 exports.addPlace = async (req, res) => {
+  console.log("Arun 1");
   try {
     const userData = userFromToken(req);
     const {
       title,
       address,
       addedPhotos,
-      desc,
+      description,
       perks,
       extraInfo,
       checkIn,
       checkOut,
-      maxGuests,
+      MaxGuests,
       price,
     } = req.body;
     const place = await Place.create({
@@ -21,23 +22,26 @@ exports.addPlace = async (req, res) => {
       title,
       address,
       photos: addedPhotos,
-      description: desc,
+      description,
       perks,
       extraInfo,
       checkIn,
       checkOut,
-      maxGuests,
+      maxGuests: MaxGuests,
       price,
     });
     res.status(200).json({
       place,
     });
   } catch (err) {
+    console.error(err);
     res.status(500).json({
-      message: 'Internal server error',
+      message: "Internal server error",
       error: err,
     });
+    console.log("Arun 2");
   }
+  console.log("Arun");
 };
 
 exports.getPlaces = async (req, res) => {
@@ -48,7 +52,7 @@ exports.getPlaces = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: 'Internal server error',
+      message: "Internal server error",
     });
   }
 };
@@ -87,12 +91,12 @@ exports.updatePlace = async (req, res) => {
       });
       await place.save();
       res.status(200).json({
-        message: 'place updated!',
+        message: "place updated!",
       });
     }
   } catch (err) {
     res.status(500).json({
-      message: 'Internal server error',
+      message: "Internal server error",
       error: err,
     });
   }
@@ -104,7 +108,7 @@ exports.singlePlace = async (req, res) => {
     const place = await Place.findById(id);
     if (!place) {
       return res.status(400).json({
-        message: 'Place not found',
+        message: "Place not found",
       });
     }
     res.status(200).json({
@@ -112,7 +116,7 @@ exports.singlePlace = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({
-      message: 'Internal serever error',
+      message: "Internal serever error",
     });
   }
 };
@@ -124,7 +128,7 @@ exports.userPlaces = async (req, res) => {
     res.status(200).json(await Place.find({ owner: id }));
   } catch (err) {
     res.status(500).json({
-      message: 'Internal serever error',
+      message: "Internal serever error",
     });
   }
 };

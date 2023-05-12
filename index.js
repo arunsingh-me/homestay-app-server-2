@@ -3,7 +3,7 @@ const cors = require("cors");
 const connectWithDB = require("./config/db");
 require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
-
+// const fileUpload = require("express-fileupload");
 // connect with database
 
 // cloudinary configuration
@@ -17,6 +17,9 @@ const app = express();
 
 // middleware to handle json
 app.use(express.json());
+// // url encoded extended  true
+// app.use(express.urlencoded({ extended: true }));
+// app.use(fileUpload());
 
 const whiteList = [
   "https://airbnb-clone0.netlify.app",
