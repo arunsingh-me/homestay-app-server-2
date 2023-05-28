@@ -132,3 +132,23 @@ exports.userPlaces = async (req, res) => {
     });
   }
 };
+
+exports.deletePlace = async (req, res) => {
+  try {
+    const userData = await userFromToken(req);
+    if (!userData) {
+      return res
+        .status(401)
+        .json({ error: "You are not authorized to access this page!" });
+    }
+    const { id } = req.params;
+    await Place.findByIdAndDelete(id);
+    res.status(200).json({
+      message: "Place deleted!",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};

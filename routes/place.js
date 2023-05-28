@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const {
@@ -6,13 +6,14 @@ const {
   getPlaces,
   updatePlace,
   singlePlace,
-  userPlaces
-} = require('../controllers/placeController');
+  userPlaces,
+  deletePlace,
+} = require("../controllers/placeController");
 
-router.route('/').get(getPlaces);
-router.route('/add-places').post(addPlace);
-router.route('/update-place').put(updatePlace);
-router.route('/user-places').get(userPlaces);
-router.route('/:id').get(singlePlace);
+router.route("/").get(getPlaces);
+router.route("/add-places").post(addPlace);
+router.route("/update-place").put(updatePlace);
+router.route("/user-places").get(userPlaces);
+router.route("/:id").get(singlePlace).delete(deletePlace);
 
 module.exports = router;
